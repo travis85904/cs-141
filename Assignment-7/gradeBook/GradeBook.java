@@ -9,8 +9,8 @@ package com.company;
  * setName() accepts an int and a string as arguments to add the student names to an ArrayList called names.
  * getName() accepts an int to return an index from the Arraylist names.
  * setScore() accepts accepts 2 ints and a double to store the students test score in the scores array.
- * getAverage() accepts an int to get the average of a specific students test scores, then drops the lowest test score,
- * and returns an average based on the number of tests.
+ * getAverage() gets the average of a specific student's test scores.  The lowest score is dropped,
+ * and an average score is returned.
  * getLetterGrade returns a letter grade based on the students average test score as calculated in getAverage().
  */
 
@@ -19,7 +19,7 @@ import java.util.Arrays;
 import java.util.stream.DoubleStream;
 
 class GradeBook {
-    private ArrayList<String> names = new ArrayList<String>();
+    private ArrayList<String> names = new ArrayList<>();
     private double[][] scores;
     private int numTests;
 
@@ -51,13 +51,15 @@ class GradeBook {
      *got rid of redundant local variable score[]
      *replaced for loop with DoubleStream.of().sum(), got rid of unused variable avg
      */
-    double getAverage(int nameIndex) {
-        Arrays.sort(scores[nameIndex]);
-        if (scores[nameIndex].length > 1) {
-            scores[nameIndex][0] = 0;
-            return DoubleStream.of(scores[nameIndex]).sum() / (numTests - 1);
+    double getAverage(int studentIndex) {
+        Arrays.sort(scores[studentIndex]);
+
+        if (scores[studentIndex].length > 1) {
+            scores[studentIndex][0] = 0;
+            return DoubleStream.of(scores[studentIndex]).sum() / (numTests - 1);
         }
-        return scores[nameIndex][0];
+
+        return scores[studentIndex][0];
     }
 
     String getLetterGrade(int index) {
