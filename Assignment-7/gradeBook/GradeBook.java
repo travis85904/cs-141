@@ -16,6 +16,7 @@ package com.company;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.stream.DoubleStream;
 
 class GradeBook {
     private ArrayList<String> names = new ArrayList<String>();
@@ -48,24 +49,18 @@ class GradeBook {
 
     /*Changes:
      *got rid of redundant local variable score[]
-     *
+     *replaced for loop with DoubleStream.of().sum(), got rid of unused variable avg
      */
     double getAverage(int nameIndex) {
-        double avg = 0;
         Arrays.sort(scores[nameIndex]);
         if (scores[nameIndex].length > 1) {
             scores[nameIndex][0] = 0;
-            for (int i = 1; i < scores[nameIndex].length; i++) {
-                avg += scores[nameIndex][i];
-            }
-            return avg / (numTests - 1);
-        } else {
-            return scores[nameIndex][0];
+            return DoubleStream.of(scores[nameIndex]).sum() / (numTests - 1);
         }
+        return scores[nameIndex][0];
     }
 
     String getLetterGrade(int index) {
-        String grade;
         if (getAverage(index) >= 90) {
             return "A";
         } else if (getAverage(index) >= 80) {
