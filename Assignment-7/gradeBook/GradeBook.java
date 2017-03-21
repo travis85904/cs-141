@@ -1,5 +1,3 @@
-package com.company;
-
 /*Travis Davis
  * Assignment 7
  *
@@ -13,6 +11,7 @@ package com.company;
  * and an average score is returned.
  * getLetterGrade returns a letter grade based on the students average test score as calculated in getAverage().
  */
+package com.company;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -24,19 +23,23 @@ class GradeBook {
     private int numTests;
 
     GradeBook(int students, int tests) {
+
         numTests = tests;
         scores = new double[students][tests];
     }
 
     void setName(int index, String name) {
+
         names.add(index, name);
     }
 
     String getName(int index) {
+
         return names.get(index);
     }
 
     void setScore(int nameIndex, int scoreIndex, double score) {
+
         scores[nameIndex][scoreIndex] = score;
     }
 
@@ -52,9 +55,9 @@ class GradeBook {
      *replaced for loop with DoubleStream.of().sum(), got rid of unused variable avg
      */
     double getAverage(int studentIndex) {
-        Arrays.sort(scores[studentIndex]);
 
         if (scores[studentIndex].length > 1) {
+            Arrays.sort(scores[studentIndex]);
             scores[studentIndex][0] = 0;
             return DoubleStream.of(scores[studentIndex]).sum() / (numTests - 1);
         }
@@ -63,6 +66,7 @@ class GradeBook {
     }
 
     String getLetterGrade(int index) {
+
         if (getAverage(index) >= 90) {
             return "A";
         } else if (getAverage(index) >= 80) {

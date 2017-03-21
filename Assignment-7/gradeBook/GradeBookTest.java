@@ -11,7 +11,6 @@ package com.company;
  * print() uses a nested for loop to print each students name, their average test score, and a letter grade
  * based on the average.
  */
-import com.sun.codemodel.internal.JOp;
 
 import javax.swing.JOptionPane;
 
@@ -24,6 +23,7 @@ public class GradeBookTest {
         setNumStudents();
         setNumTests();
         grades = new GradeBook(numStudents, numTests);
+        setStudentName();
         setScores();
         print();
     }
@@ -36,9 +36,14 @@ public class GradeBookTest {
         numTests = Integer.parseInt(JOptionPane.showInputDialog("Enter the number of tests per student"));
     }
 
-    private static void setScores() {
+    private static void setStudentName() {
         for (int i = 0; i < numStudents; i++) {
             grades.setName(i, JOptionPane.showInputDialog("Enter the name for student number " + (i + 1)));
+        }
+    }
+
+    private static void setScores() {
+        for (int i = 0; i < numStudents; i++) {
             for (int j = 0; j < numTests; j++) {
                 grades.setScore(i, j, Double.parseDouble(
                         JOptionPane.showInputDialog("Enter " + grades.getName(i) + "'s score for test number " + (j + 1))));
